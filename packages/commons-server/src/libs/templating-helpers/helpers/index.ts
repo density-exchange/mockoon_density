@@ -48,6 +48,8 @@ import int from './int';
 import ipv4 from './ipv4';
 import ipv6 from './ipv6';
 import join from './join';
+import finder from './jsonKeyValue';
+import parser from './jsonParser';
 import lastName from './lastName';
 import lat from './lat';
 import len from './len';
@@ -160,5 +162,7 @@ export const Helpers = {
   tld,
   toFixed,
   uppercase,
-  zipcode
+  zipcode,
+  parser,
+  finder,
 };

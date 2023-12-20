@@ -1,0 +1,293 @@
+{
+    "uuid": "7f98f3ee-ead8-420e-b4e4-4237bbd96345",
+    "lastMigration": 32,
+    "name": "Demo API",
+    "endpointPrefix": "",
+    "latency": 0,
+    "port": 3000,
+    "hostname": "",
+    "folders": [],
+    "routes": [
+      {
+        "uuid": "5d359256-d7e4-42f4-81f5-ef3fcaa8159b",
+        "type": "http",
+        "documentation": "",
+        "method": "post",
+        "endpoint": "fapi/v1/batchOrders",
+        "responses": [
+          {
+            "uuid": "533bcdb1-bbe4-4937-90d7-5e102aaf7c31",
+            "body": "[\n{{#each (parser (queryParam 'batchOrders'))}}\n{{setVar 'order' @this}}\n{{#switch (finder this 'symbol')}}\n  {{#case 'BTCUSDT'}}\n  {\n  \"orderId\":{{int 1000000 10000000}},\n  \"symbol\":\"{{finder @order 'symbol'}}\",\n  \"status\":\"NEW\",\n  \"clientOrderId\":\"{{finder @order 'newClientOrderId'}}\",\n  \"price\":\"38000.00\",\n  \"avgPrice\":\"0.00\",\n  \"origQty\":\"{{finder @order 'quantity'}}\",\n  \"executedQty\":\"0.000\",\n  \"cumQty\":\"0.000\",\n  \"cumQuote\":\"0.00000\",\n  \"timeInForce\":\"{{finder @order 'timeInForce'}}\",\n  \"type\":\"{{finder @order 'type'}}\",\n  \"reduceOnly\":{{finder @order 'reduceOnly'}},\n  \"closePosition\":false,\n  \"side\":\"{{finder @order 'side'}}\",\n  \"positionSide\":\"BOTH\",\n  \"stopPrice\":\"{{finder @order 'stopPrice'}}\",\n  \"workingType\":\"CONTRACT_PRICE\",\n  \"priceProtect\":false,\n  \"origType\":\"{{finder @order 'type'}}\",\n  \"priceMatch\":\"NONE\",\n  \"selfTradePreventionMode\":\"NONE\",\n  \"goodTillDate\":0,\n  \"updateTime\":1702923436898\n  }\n  {{/case}}\n  {{#case 'ETHUSDT'}}\n  {\n     \"code\": -2015,\n    \"msg\": \"Margin in sufficient\"\n  }\n  {{/case}}\n  {{#default}}\n  {\n    \"code\": -2014,\n    \"msg\": \"API-key format invalid.\"\n  }\n  {{/default}}\n{{/switch}}\n{{#unless @last}},{{/unless}}\n{{/each}}\n]",
+            "latency": 0,
+            "statusCode": 200,
+            "label": "",
+            "headers": [
+              {
+                "key": "connection",
+                "value": "close"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "date",
+                "value": "Wed, 20 Dec 2023 07:26:32 GMT"
+              },
+              {
+                "key": "referrer-policy",
+                "value": "origin-when-cross-origin"
+              },
+              {
+                "key": "server",
+                "value": "Bengine"
+              },
+              {
+                "key": "strict-transport-security",
+                "value": "max-age=31536000; includeSubdomains"
+              },
+              {
+                "key": "via",
+                "value": "1.1 42c67bc72657aad4b20077af526244b4.cloudfront.net (CloudFront)"
+              },
+              {
+                "key": "x-amz-cf-id",
+                "value": "QRVkA-ycWt74BIPqlP-rql-9TwxZOxYSBsfxkTPkDnF5FzSZ_UWG3w=="
+              },
+              {
+                "key": "x-amz-cf-pop",
+                "value": "BLR50-P1"
+              },
+              {
+                "key": "x-cache",
+                "value": "Error from cloudfront"
+              },
+              {
+                "key": "x-content-type-options",
+                "value": "nosniff"
+              },
+              {
+                "key": "x-frame-options",
+                "value": "SAMEORIGIN"
+              },
+              {
+                "key": "x-mbx-used-weight-1m",
+                "value": "5"
+              },
+              {
+                "key": "x-response-time",
+                "value": "0ms"
+              },
+              {
+                "key": "x-xss-protection",
+                "value": "1; mode=block"
+              },
+              {
+                "key": "content-length",
+                "value": "46"
+              }
+            ],
+            "bodyType": "INLINE",
+            "filePath": "",
+            "databucketID": "",
+            "sendFileAsBody": false,
+            "rules": [],
+            "rulesOperator": "OR",
+            "disableTemplating": false,
+            "fallbackTo404": false,
+            "default": false,
+            "crudKey": "id",
+            "callbacks": []
+          }
+        ],
+        "responseMode": null
+      },
+      {
+        "uuid": "d59809c6-1dd0-4a7a-aeb5-c260fedfa971",
+        "type": "http",
+        "documentation": "",
+        "method": "post",
+        "endpoint": "fapi/v1/order",
+        "responses": [
+          {
+            "uuid": "9aa7069d-ad20-41e7-a956-48c627638dab",
+            "body": "{{setVar 'order' (parser (queryParam))}}\n{{#switch (finder @order 'symbol')}}\n  {{#case 'BTCUSDT'}}\n  {\n  \"orderId\":{{int 1000000 10000000}},\n  \"symbol\":\"{{finder @order 'symbol'}}\",\n  \"status\":\"NEW\",\n  \"clientOrderId\":\"{{finder @order 'newClientOrderId'}}\",\n  \"price\":\"38000.00\",\n  \"avgPrice\":\"0.00\",\n  \"origQty\":\"{{finder @order 'quantity'}}\",\n  \"executedQty\":\"0.000\",\n  \"cumQty\":\"0.000\",\n  \"cumQuote\":\"0.00000\",\n  \"timeInForce\":\"{{finder @order 'timeInForce'}}\",\n  \"type\":\"{{finder @order 'type'}}\",\n  \"reduceOnly\":{{finder @order 'reduceOnly'}},\n  \"closePosition\":false,\n  \"side\":\"{{finder @order 'side'}}\",\n  \"positionSide\":\"BOTH\",\n  \"stopPrice\":\"{{finder @order 'stopPrice'}}\",\n  \"workingType\":\"CONTRACT_PRICE\",\n  \"priceProtect\":false,\n  \"origType\":\"{{finder @order 'type'}}\",\n  \"priceMatch\":\"NONE\",\n  \"selfTradePreventionMode\":\"NONE\",\n  \"goodTillDate\":0,\n  \"updateTime\":1702923436898\n  }\n  {{/case}}\n  {{#case 'ETHUSDT'}}\n  {\n     \"code\": -2015,\n    \"msg\": \"Margin in sufficient\"\n  }\n  {{/case}}\n  {{#default}}\n  {\n    \"code\": -2014,\n    \"msg\": \"API-key format invalid.\"\n  }\n  {{/default}}\n{{/switch}}",
+            "latency": 0,
+            "statusCode": 400,
+            "label": "",
+            "headers": [
+              {
+                "key": "access-control-allow-methods",
+                "value": "GET, POST, PUT, DELETE, OPTIONS"
+              },
+              {
+                "key": "access-control-allow-origin",
+                "value": "*"
+              },
+              {
+                "key": "connection",
+                "value": "close"
+              },
+              {
+                "key": "content-type",
+                "value": "application/json"
+              },
+              {
+                "key": "date",
+                "value": "Wed, 20 Dec 2023 07:28:20 GMT"
+              },
+              {
+                "key": "server",
+                "value": "Bengine"
+              },
+              {
+                "key": "via",
+                "value": "1.1 d9c39d41f6bc4387cae60b31b510cd4c.cloudfront.net (CloudFront)"
+              },
+              {
+                "key": "x-amz-cf-id",
+                "value": "nEDXdT2D4xmNQasT_JzCz-5QgrlYLAbtdN5hQ-sZaK6y4k-CD4iQxw=="
+              },
+              {
+                "key": "x-amz-cf-pop",
+                "value": "BLR50-P1"
+              },
+              {
+                "key": "x-cache",
+                "value": "Error from cloudfront"
+              },
+              {
+                "key": "x-mbx-used-weight-1m",
+                "value": "-1"
+              },
+              {
+                "key": "x-response-time",
+                "value": "0ms"
+              },
+              {
+                "key": "content-length",
+                "value": "46"
+              }
+            ],
+            "bodyType": "INLINE",
+            "filePath": "",
+            "databucketID": "",
+            "sendFileAsBody": false,
+            "rules": [],
+            "rulesOperator": "OR",
+            "disableTemplating": false,
+            "fallbackTo404": false,
+            "default": true,
+            "crudKey": "id",
+            "callbacks": []
+          },
+          {
+            "uuid": "043cb5e9-623d-4ff3-a98e-c22a34778819",
+            "body": "{{setVar 'order' (parser (queryParam))}}\n{{#switch (finder @order 'symbol')}}\n  {{#case 'BTCUSDT'}}\n  {\n  \"orderId\":{{int 1000000 10000000}},\n  \"symbol\":\"{{finder @order 'symbol'}}\",\n  \"status\":\"NEW\",\n  \"clientOrderId\":\"{{finder @order 'newClientOrderId'}}\",\n  \"price\":\"38000.00\",\n  \"avgPrice\":\"0.00\",\n  \"origQty\":\"{{finder @order 'quantity'}}\",\n  \"executedQty\":\"0.000\",\n  \"cumQty\":\"0.000\",\n  \"cumQuote\":\"0.00000\",\n  \"timeInForce\":\"{{finder @order 'timeInForce'}}\",\n  \"type\":\"{{finder @order 'type'}}\",\n  \"reduceOnly\":{{finder @order 'reduceOnly'}},\n  \"closePosition\":false,\n  \"side\":\"{{finder @order 'side'}}\",\n  \"positionSide\":\"BOTH\",\n  \"stopPrice\":\"{{finder @order 'stopPrice'}}\",\n  \"workingType\":\"CONTRACT_PRICE\",\n  \"priceProtect\":false,\n  \"origType\":\"{{finder @order 'type'}}\",\n  \"priceMatch\":\"NONE\",\n  \"selfTradePreventionMode\":\"NONE\",\n  \"goodTillDate\":0,\n  \"updateTime\":1702923436898\n  }\n  {{/case}}\n  {{#case 'ETHUSDT'}}\n  {\n     \"code\": -2015,\n    \"msg\": \"Margin in sufficient\"\n  }\n  {{/case}}\n  {{#default}}\n  {\n    \"code\": -2014,\n    \"msg\": \"API-key format invalid.\"\n  }\n  {{/default}}\n{{/switch}}",
+            "latency": 0,
+            "statusCode": 400,
+            "label": "",
+            "headers": [],
+            "bodyType": "INLINE",
+            "filePath": "",
+            "databucketID": "",
+            "sendFileAsBody": false,
+            "rules": [
+              {
+                "target": "query",
+                "modifier": "symbol",
+                "value": "ETHUSDT",
+                "invert": false,
+                "operator": "equals"
+              }
+            ],
+            "rulesOperator": "OR",
+            "disableTemplating": false,
+            "fallbackTo404": false,
+            "default": false,
+            "crudKey": "id",
+            "callbacks": []
+          },
+          {
+            "uuid": "5e8402c2-562e-4173-be5e-77e3f02b94b5",
+            "body": "{{setVar 'order' (parser (queryParam))}}\n{{#switch (finder @order 'symbol')}}\n  {{#case 'BTCUSDT'}}\n  {\n  \"orderId\":{{int 1000000 10000000}},\n  \"symbol\":\"{{finder @order 'symbol'}}\",\n  \"status\":\"NEW\",\n  \"clientOrderId\":\"{{finder @order 'newClientOrderId'}}\",\n  \"price\":\"38000.00\",\n  \"avgPrice\":\"0.00\",\n  \"origQty\":\"{{finder @order 'quantity'}}\",\n  \"executedQty\":\"0.000\",\n  \"cumQty\":\"0.000\",\n  \"cumQuote\":\"0.00000\",\n  \"timeInForce\":\"{{finder @order 'timeInForce'}}\",\n  \"type\":\"{{finder @order 'type'}}\",\n  \"reduceOnly\":{{finder @order 'reduceOnly'}},\n  \"closePosition\":false,\n  \"side\":\"{{finder @order 'side'}}\",\n  \"positionSide\":\"BOTH\",\n  \"stopPrice\":\"{{finder @order 'stopPrice'}}\",\n  \"workingType\":\"CONTRACT_PRICE\",\n  \"priceProtect\":false,\n  \"origType\":\"{{finder @order 'type'}}\",\n  \"priceMatch\":\"NONE\",\n  \"selfTradePreventionMode\":\"NONE\",\n  \"goodTillDate\":0,\n  \"updateTime\":1702923436898\n  }\n  {{/case}}\n  {{#case 'ETHUSDT'}}\n  {\n     \"code\": -2015,\n    \"msg\": \"Margin in sufficient\"\n  }\n  {{/case}}\n  {{#default}}\n  {\n    \"code\": -2014,\n    \"msg\": \"API-key format invalid.\"\n  }\n  {{/default}}\n{{/switch}}",
+            "latency": 0,
+            "statusCode": 200,
+            "label": "",
+            "headers": [],
+            "bodyType": "INLINE",
+            "filePath": "",
+            "databucketID": "",
+            "sendFileAsBody": false,
+            "rules": [
+              {
+                "target": "query",
+                "modifier": "symbol",
+                "value": "BTCUSDT",
+                "invert": false,
+                "operator": "equals"
+              }
+            ],
+            "rulesOperator": "OR",
+            "disableTemplating": false,
+            "fallbackTo404": false,
+            "default": false,
+            "crudKey": "id",
+            "callbacks": []
+          }
+        ],
+        "responseMode": null
+      }
+    ],
+    "rootChildren": [
+      {
+        "type": "route",
+        "uuid": "5d359256-d7e4-42f4-81f5-ef3fcaa8159b"
+      },
+      {
+        "type": "route",
+        "uuid": "d59809c6-1dd0-4a7a-aeb5-c260fedfa971"
+      }
+    ],
+    "proxyMode": true,
+    "proxyHost": "https://testnet.binancefuture.com",
+    "proxyRemovePrefix": true,
+    "tlsOptions": {
+      "enabled": false,
+      "type": "CERT",
+      "pfxPath": "",
+      "certPath": "",
+      "keyPath": "",
+      "caPath": "",
+      "passphrase": ""
+    },
+    "cors": true,
+    "headers": [
+      {
+        "key": "Content-Type",
+        "value": "application/json"
+      }
+    ],
+    "proxyReqHeaders": [
+      {
+        "key": "",
+        "value": ""
+      }
+    ],
+    "proxyResHeaders": [
+      {
+        "key": "",
+        "value": ""
+      }
+    ],
+    "data": [
+      {
+        "uuid": "7e3e4209-917e-448c-951f-2220a886a7fc",
+        "id": "b3hw",
+        "name": "Users",
+        "documentation": "",
+        "value": "[\n  {{#repeat 50}}\n  {\n    \"id\": \"{{faker 'string.uuid'}}\",\n    \"username\": \"{{faker 'internet.userName'}}\"\n  }\n  {{/repeat}}\n]"
+      }
+    ],
+    "callbacks": []
+  }
