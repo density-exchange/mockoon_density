@@ -17,8 +17,7 @@ jobs:
       - name: Login to GAR
         uses: docker/login-action@v3
         with:
-          registry: asia-south1-docker.pkg.dev/density-dev-app-layer/density-dev-artifact-registry/density-frontend-admin
-          username: _json_key
+          registry: asia-south1-docker.pkg.dev/density-dev-app-layer/density-dev-artifact-registry/density-mockoon-image
           password: ${{ secrets.DENSITY_DEV_GITHUB_GAR_SA }}
       - name: Set short SHA
         id: sha
